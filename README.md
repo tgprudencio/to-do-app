@@ -35,15 +35,17 @@ Other dependencies are listed on `package.json` and will be installed after foll
 ## Generate APK
 
 1. Make sure all dependencies are installed correctly
-2. Build project:
+2. Add Android platform:
+    - ionic capacitor add android
+3. Build project:
     - ionic capacitor build android
-3. Open project on Android Studio
+4. Open project on Android Studio
     - ionic cap open android
-4. On Android, go to:
+5. On Android, go to:
     - Build -> Generate Signed App Bundle(s)/APK(s) -> APK.
-5. Select a valid signature key or generate one by following official docs in:
+6. Select a valid signature key or generate one by following official docs in:
     - "https://docs.oracle.com/cd/E29805_01/server.230/es_admin/src/tadm_ssl_jetty_keystore.html"
-6. Fill up the form with the keystore credentials
-7. Select Build Variant "Release" and press "Create"
-8. The generated APK will be located in:
+7. Fill up the form with the keystore credentials
+8. Select Build Variant "Release" and press "Create"
+9. The generated APK will be located in:
     - android/app/release/app-release.apk
