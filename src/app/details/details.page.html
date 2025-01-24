@@ -1,0 +1,54 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>{{ data.title }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="medium" fill="clear" (click)="dismiss()">
+        <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form (submit)="onSubmit()" #form="ngForm">
+    <ion-item>
+      <ion-label position="floating">Title</ion-label>
+      <ion-input type="text" [(ngModel)]="formData.title" name="title"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Description</ion-label>
+      <ion-textarea required [(ngModel)]="formData.todo" name="todo"></ion-textarea>
+    </ion-item>
+
+    <ion-item *ngIf="data.role === 'new'">
+      <ion-label position="floating">Deadline</ion-label>
+      <br>
+      <ion-input
+        value="{{ formData.deadline | date: 'dd/MM/yyyy' }}"
+        disabled="true"
+        id="date"
+        class="ion-text-start"
+      ></ion-input>
+      <ion-popover trigger="date" size="cover">
+        <ng-template>
+          <ion-datetime
+            presentation="date"
+            [(ngModel)]="formData.deadline" 
+            name="deadline"
+            [min]="minDate"
+          ></ion-datetime>
+        </ng-template>
+      </ion-popover>
+    </ion-item>
+
+    <ion-item *ngIf="data.role === 'edit'">
+      <ion-label position="fixed">Completed?</ion-label>
+      <ion-toggle slot="end" [(ngModel)]="formData.completed" name="completed"></ion-toggle>
+    </ion-item>
+
+    <ion-button color="tertiary" expand="block" type="submit" class="ion-margin-top" [disabled]="form.invalid">
+      Enviar
+    </ion-button>
+  </form>
+</ion-content>

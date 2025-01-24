@@ -1,0 +1,62 @@
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Home</ion-title>
+    <ion-button color="tertiary" slot="end" [disabled]="!isOnline" class="syncButton" (click)="getUserTasks()">
+      <ion-icon slot="icon-only" name="sync"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="content-container"> 
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-icon name="hourglass" color="warning" class="statusIcon"></ion-icon><ion-text class="listLegend"> - Pending</ion-text>
+            <ion-icon slot="end" name="checkmark-circle" color="success" class="statusIcon listLegend"></ion-icon><ion-text slot="end" class="listLegend"> - Concluded</ion-text>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-searchbar [(ngModel)]="searchBarValue" (ionInput)="filterItems()" debounce="500" placeholder="Search task..."></ion-searchbar>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-list lines="full">
+            <ion-item *ngFor="let item of filteredItems">
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="1.5" class="taskIcon">
+                    <ion-button fill="outline" color="tertiary" (click)="changeTaskStatus(item)">
+                      <ion-icon slot="icon-only" *ngIf="item.completed" name="checkmark-circle" color="success" class="statusIcon"></ion-icon> 
+                      <ion-icon slot="icon-only" *ngIf="!item.completed" name="hourglass" color="warning" class="statusIcon"></ion-icon>
+                    </ion-button>
+                  </ion-col>
+                  <ion-col size="7" class="taskDescription">
+                    <p class="mainText" *ngIf="item.title">{{ item.title }}</p>
+                    <p class="mainText">{{ item.todo }}</p>
+                    <p *ngIf="item.deadline" class="subText">Due date: {{ item.deadline | date: 'dd/MM/yyyy' }}</p> 
+                  </ion-col>
+                  <ion-col size="3.5" class="taskButton">
+                    <ion-button color="tertiary" #actionButton (click)="presentActionSheet(item)">
+                      <ion-text>More</ion-text>
+                      <ion-icon name="chevron-down"></ion-icon>
+                    </ion-button>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button color="success" (click)="newTask()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  
+  
+  
+</ion-content>

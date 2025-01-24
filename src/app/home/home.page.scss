@@ -1,0 +1,48 @@
+
+.syncButton {
+  margin-right: 10px;
+}
+.listLegend {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.mainText {
+  font-size: 14px;
+  line-height: 18px;
+  color: #8c8c8c;
+  margin: 0;
+}
+
+.subText {
+  font-size: 12px;
+  line-height: 18px;
+  color: #8c8c8c;
+  margin: 0;
+}
+
+ion-list {
+  max-height: 80vh; 
+  overflow-y: auto; 
+}
+
+.statusIcon{
+  font-size: 22px;
+}
+
+.taskIcon{
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  margin: 0%;
+}
+
+.taskDescription {
+  font-weight: bold;
+  color: white;
+}
+
+.taskButton {
+  display: flex;
+  align-items: center;
+}
