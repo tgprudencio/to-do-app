@@ -104,16 +104,22 @@ export class DetailsPage implements OnInit {
         this.presentAlert('Success', 'You are disconnected. Task updated successfully', true);
       }
     } else { // Insert Task
-      this.homeService.insertTask(this.formData).subscribe(
-        () => this.wrapUpInsertRoutine(),
-        (error) => {
-          if (error.status === 500) {
-            this.presentAlert('Server Error', 'An error has occurred. Try again later.', false);
-          } else {
-            this.presentAlert(`Unknown Error ${error.status || ''}`, error.message || 'Something went wrong.', false);
+      if(this.isOnline) {
+        this.homeService.insertTask(this.formData).subscribe(
+          () => this.wrapUpInsertRoutine(),
+          (error) => {
+            if (error.status === 500) {
+              this.presentAlert('Server Error', 'An error has occurred. Try again later.', false);
+            } else {
+              this.presentAlert(`Unknown Error ${error.status || ''}`, error.message || 'Something went wrong.', false);
+            }
           }
-        }
-      );
+        );
+      } else {
+        this.formattedObj['id'] = Math.floor(Math.random() * 10000);
+        this.presentAlert('Success', 'You are disconnected. Task created successfully', true);
+      }
+      
     }
     
   }
